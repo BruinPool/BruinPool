@@ -1,0 +1,30 @@
+.UpcomingFeedEntry {
+  margin: 5px auto 5px auto;
+  background-color: white;
+  cursor: pointer;
+}
+
+.UpcomingFeedEntry:hover .destination {
+  text-decoration: underline;
+}
+
+.profilePic {
+  display: inline-block;
+  font-size: 50px;
+  margin-right: 5px;
+}
+
+.detail {
+  display: inline-block;
+  position: fixed;
+  margin-top: 8px;
+}
+
+.margin {
+  height: 5px;
+}
+
+.date {
+  font-size: 12px;
+}
+

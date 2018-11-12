@@ -5,6 +5,7 @@ const ENTRY = path.join(__dirname, 'client', 'app.js');
 const OUTPUT = {
   path: path.resolve(__dirname, 'public', 'transpiled'),
   filename: 'bundle.js',
+  publicPath: '/',
 };
 
 const LOADERS = {
@@ -30,6 +31,9 @@ module.exports = {
   output: OUTPUT,
   module: LOADERS,
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true,
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
   },

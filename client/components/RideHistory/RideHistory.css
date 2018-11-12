@@ -1,0 +1,46 @@
+.RideHistory {
+  width: 32%;
+  margin: auto;
+  padding-left: 2.5%;
+  font-size: 14px;
+}
+
+.head {
+  margin: auto auto 5px auto;
+  height: 20px;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+  line-height: 20px;
+}
+
+.seats {
+  display: inline-block;
+  width: 50px;
+}
+
+.from {
+  display: inline-block;
+  width: 120px;
+}
+
+.to {
+  display: inline-block;
+  width: 120px;
+}
+
+.date {
+  display: inline-block;
+  width: 90px;
+}
+
+.price {
+  display: inline-block;
+  width: 30px;
+}
+
+.divider {
+  display: inline-block;
+  /*width: 8%;*/
+}

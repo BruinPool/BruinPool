@@ -1,0 +1,46 @@
+.imgContainer {
+  width: 55%;
+  margin-top: 59px;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  text-align: center;
+  line-height: 29;
+  font-size: 30px;
+}
+
+.coverImg {
+  width: 200px;
+  border-radius: 50px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.modulesContainer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 45%;
+  background-color: white;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  .imgContainer {
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+
+  .modulesContainer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: white;
+  }
+  
+}

@@ -1,0 +1,64 @@
+.MyAccount {
+  margin: auto;
+  width: 75%;
+  margin-top: 150px;
+}
+
+.userInfo {
+  position: relative;
+  margin: auto;
+  width: 60%;
+  height: 200px;
+}
+
+.profilePic {
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  background-color: black;
+  margin-right: 20%;
+}
+
+.infoContainer {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  bottom: 0;
+  height: 80%;
+  margin: auto;
+}
+
+.username {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.margin {
+  height: 10px;
+}
+
+.indicator {
+  border-top: 1px solid #dcdcdc;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.true {
+  display: inline-block;
+  width: 20%;
+  border-top: 1px solid green;
+  cursor: pointer;
+}
+
+.off {
+  display: inline-block;
+  width: 20%;
+  cursor: pointer;
+}
+
+.btnWrapper {
+  height: 30px;
+  line-height: 40px;
+}

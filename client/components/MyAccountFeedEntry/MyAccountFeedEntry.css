@@ -1,0 +1,31 @@
+.MyAccountFeedEntry {
+  display: inline-block;
+  width: 200px;
+  padding: 0 3px 0 3px;
+}
+
+.profilePic {
+  display: inline-block;
+  font-size: 50px;
+  margin-right: 5px;
+}
+
+.detail {
+  display: inline-block;
+  background-color: white;
+  width: 100%;
+  cursor: pointer;
+  border: 0.5px solid gray;
+  height: 300px;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.margin {
+  height: 5px;
+}
+
+.date {
+  font-size: 12px;
+}
+
