@@ -8,7 +8,7 @@
 .head {
   margin: auto auto 5px auto;
   height: 20px;
-  border: 1px solid #e4e4e4;
+  border: 1px solid #ff153c;
   border-radius: 5px;
   background-color: white;
   padding: 10px;
@@ -43,4 +43,19 @@
 .divider {
   display: inline-block;
   /*width: 8%;*/
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .FeedModule {
+    width: 96%;
+    margin-top: 5px;
+    margin-right: unset;
+    padding: 2%;
+    margin-left: unset;
+  }
+
+  .head {
+    display: none;
+  }
 }

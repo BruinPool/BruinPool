@@ -44,3 +44,18 @@
   display: inline-block;
   /*width: 8%;*/
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .RideHistory {
+    width: 96%;
+    margin-top: 5px;
+    margin-right: unset;
+    padding: 2%;
+    margin-left: unset;
+  }
+
+  .head {
+    display: none;
+  }
+}

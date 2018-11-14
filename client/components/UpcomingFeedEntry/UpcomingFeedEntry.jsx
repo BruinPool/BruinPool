@@ -4,12 +4,28 @@ import style from './UpcomingFeedEntry.css';
 class UpcomingFeedEntry extends Component {
   constructor (props) {
     super(props);
+
+    this.rideCancelHandle = this.rideCancelHandle.bind(this);
+    this.driveCancelHandle = this.driveCancelHandle.bind(this);
+  }
+
+  rideCancelHandle () {
+    const { entry, rideCancel } = this.props;
+
+    rideCancel(entry);
+  }
+
+  driveCancelHandle () {
+    const { entry, driveCancel } = this.props;
+
+    driveCancel(entry);
   }
 
   render () {
     const {
       entry,
-      userInfo
+      userInfo,
+      type,
     } = this.props;
 
     return (
@@ -23,9 +39,18 @@ class UpcomingFeedEntry extends Component {
           </div>
           <div className={style.margin} />
           <div className={style.date}>
-            {entry.date.toLocaleDateString()}
+            {new Date(entry.date).toLocaleDateString()}
           </div>
         </div>
+        {type === 'drive' ? (
+          <button className={style.cancelBtn} type="button" onClick={this.driveCancelHandle}>
+            <i className="fas fa-times-circle" />
+          </button>
+        ) : (
+          <button className={style.cancelBtn} type="button" onClick={this.rideCancelHandle}>
+            <i className="fas fa-times-circle" />
+          </button>
+        )}
       </div>
     );
   }

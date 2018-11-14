@@ -1,35 +1,37 @@
 .MyAccountFeed {
   position: relative;
-  text-align: center;
+  /*text-align: center;*/
   margin-top: 20px;
 }
 
 .leftBtn {
   position: absolute;
-  border: 0.5px solid gray;
-  width: 30px;
+  font-size: 30px;
   top: 0;
   bottom: 0;
   left: 0;
-  border-radius: 15px;
-  height: 30px;
   margin: auto;
-  background-color: white;
-  opacity: 1;
   cursor: pointer;
+  line-height: 220px;
+  color: gray;
 }
 
 .rightBtn {
   position: absolute;
-  border: 0.5px solid gray;
-  width: 30px;
+  font-size: 30px;
   top: 0;
   bottom: 0;
   right: 0;
-  border-radius: 15px;
-  height: 30px;
   margin: auto;
-  background-color: white;
-  opacity: 1;
   cursor: pointer;
+  line-height: 220px;
+  color: gray;
+}
+
+.leftBtn:hover {
+  color: black;
+}
+
+.rightBtn:hover {
+  color: black;
 }

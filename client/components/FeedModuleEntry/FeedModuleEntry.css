@@ -19,7 +19,6 @@
 }
 
 .FeedModuleEntryExpanded {
-  /*height: 250px;*/
   padding: 10px;
   margin: auto auto 5px auto;
   border: 1px solid #e4e4e4;
@@ -31,6 +30,17 @@
   transition: 0.5s;
   opacity: 1;
   animation: fadeIn 1s ease;
+}
+
+.profilePic {
+  font-size: 30px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.ownerUsernameExpanded {
+  font-size: 18px;
+  display: inline-block;
 }
 
 .seats {
@@ -83,12 +93,57 @@
   cursor: pointer;
 }
 
+.cancelBtn {
+  width: 100%;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  height: 38px;
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.driveEditBtn {
+  width: 47.5%;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  height: 38px;
+  color: white;
+  background-color: #f7b400; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.marginBtn {
+  display: inline-block;
+  width: 5%;
+}
+
+.driveCancelBtn {
+  width: 47.5%;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  height: 38px;
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .expandBtn {
   float: right;
 }
 
 .seatsExpanded {
   font-size: 13px;
+}
+
+.detailExpanded {
+  word-wrap: break-word;
 }
 
 .divider {

@@ -23,14 +23,15 @@ class FilterModule extends Component {
     this.handleTo = this.handleTo.bind(this);
     this.handleDate = this.handleDate.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   handleFrom (val) {
-    this.setState({ from: val })
+    this.setState({ from: val });
   }
 
   handleTo (val) {
-    this.setState({ to: val })
+    this.setState({ to: val });
   }
 
   handleDate (date) {
@@ -39,6 +40,12 @@ class FilterModule extends Component {
 
   handleChange (e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onClick () {
+    const { fetch } = this.props;
+    const { from, to, date } = this.state;
+    fetch({ from: from.label, to: to.label, date });
   }
 
   render () {
@@ -88,15 +95,15 @@ class FilterModule extends Component {
                   placeholderText="Click to select a date/time"
                   selected={date}
                   onChange={this.handleDate}
-                  showTimeSelect
-                  dateFormat="LLL"
+                  minDate={moment()}
+                  showDisabledMonthNavigation
                 />
               </div>
             </label>
           </div>
         </form>
         <div className={style.margin} />
-        <button className={style.postBtn} type="button">
+        <button className={style.postBtn} type="button" onClick={this.onClick}>
           Find a ride
         </button>
       </div>

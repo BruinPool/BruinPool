@@ -9,11 +9,11 @@ class PostModule extends Component {
   constructor () {
     super();
     this.state = {
-      calendar: false,
       from: '',
       to: '',
       date: moment(),
       time: '',
+      seats: '',
       price: '',
       detail: '',
       destination: [
@@ -27,14 +27,36 @@ class PostModule extends Component {
     this.handleTo = this.handleTo.bind(this);
     this.handleDate = this.handleDate.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick () {
+    const { post } = this.props;
+    const {
+      from,
+      to,
+      date,
+      time,
+      seats,
+      price,
+      detail,
+    } = this.state;
+    post({
+      from: from.label,
+      to: to.label,
+      date,
+      time,
+      price,
+      detail,
+    });
   }
 
   handleFrom (val) {
-    this.setState({ from: val })
+    this.setState({ from: val });
   }
 
   handleTo (val) {
-    this.setState({ to: val })
+    this.setState({ to: val });
   }
 
   handleDate (date) {
@@ -47,11 +69,11 @@ class PostModule extends Component {
 
   render () {
     const {
-      calendar,
       from,
       to,
       date,
       time,
+      seats,
       price,
       detail,
       destination,
@@ -68,7 +90,7 @@ class PostModule extends Component {
                   value={from}
                   onChange={this.handleFrom}
                   options={destination}
-                  style={{cursor: 'text'}}
+                  style={{ cursor: 'text' }}
                 />
               </div>
             </label>
@@ -96,9 +118,17 @@ class PostModule extends Component {
                   placeholderText="Click to select a date/time"
                   selected={date}
                   onChange={this.handleDate}
-                  showTimeSelect
-                  dateFormat="LLL"
+                  minDate={moment()}
+                  showDisabledMonthNavigation
                 />
+              </div>
+            </label>
+          </div>
+          <div className={style.seatsWrapper}>
+            <label>
+              Seats
+              <div>
+                <input className={style.seatsInput} name="seats" value={seats} onChange={this.handleChange} />
               </div>
             </label>
           </div>
@@ -121,7 +151,7 @@ class PostModule extends Component {
           </div>
         </form>
         <div className={style.margin} />
-        <button className={style.postBtn} type="button">
+        <button className={style.postBtn} type="button" onClick={this.onClick}>
           Post a ride
         </button>
       </div>

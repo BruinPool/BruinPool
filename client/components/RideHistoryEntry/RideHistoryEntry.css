@@ -10,7 +10,7 @@
 .RideHistoryEntry {
   margin: auto auto 5px auto;
   height: 35px;
-  border: 1px solid #e4e4e4;
+  border: 1px solid #f7b400;
   border-radius: 5px;
   background-color: white;
   padding: 10px;
@@ -22,7 +22,7 @@
   /*height: 250px;*/
   padding: 10px;
   margin: auto auto 5px auto;
-  border: 1px solid #e4e4e4;
+  border: 1px solid #f7b400;
   border-radius: 5px;
   background-color: white;
   -webkit-transition: 0.5s;
@@ -31,6 +31,10 @@
   transition: 0.5s;
   opacity: 1;
   animation: fadeIn 1s ease;
+}
+
+.statusExpanded {
+  color: green;
 }
 
 .seats {

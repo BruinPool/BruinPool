@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import style from './DriverPage.css';
-import Header from '../Header/Header';
 import PostModule from '../PostModule/PostModule';
 import RideHistory from '../RideHistory/RideHistory';
-import RideHistoryEntry from '../RideHistoryEntry/RideHistoryEntry';
 import UpcomingFeed from '../UpcomingFeed/UpcomingFeed';
-import UpcomingFeedEntry from '../UpcomingFeedEntry/UpcomingFeedEntry';
+import EmptyPage from '../EmptyPage/EmptyPage';
 import { feed, upcoming } from '../mockData';
 
 const axios = require('axios');
@@ -14,30 +12,79 @@ class DriverPage extends Component {
   constructor () {
     super();
     this.state = {
-      rideHistory: feed,
-      upcomingRide: upcoming,
-    }
+      rideHistory: [],
+      upcomingRide: [],
+    };
 
-    this.fetchRideHistory = this.fetchRideHistory.bind(this);
+    this.fetch = this.fetch.bind(this);
+    this.fetchUpcoming = this.fetchUpcoming.bind(this);
+    this.post = this.post.bind(this);
   }
 
-  componentDidMount () {
+  componentWillMount () {
+    this.fetch();
+    this.fetchUpcoming();
+  }
+
+  fetch () {
     const { userInfo } = this.props;
 
-    // this.fetchRideHistory(userInfo.username);
-  }
-
-  fetchRideHistory (username) {
     axios.get('/rideList', {
       params: {
-        username,
+        userInfo,
+        type: 'driveHistory',
       },
     })
-      .then((response) => {
+      .then((res) => {
         this.setState({
-          rideHistory: response.data,
-          upcomingRide: response.data.slice(0, 1),
+          rideHistory: res.data,
         });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  fetchUpcoming () {
+    const { userInfo } = this.props;
+
+    axios.get('/rideList', {
+      params: {
+        userInfo,
+        type: 'driveUpcoming',
+      },
+    })
+      .then((res) => {
+        this.setState({
+          upcomingRide: res.data,
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  post (info) {
+    const { userInfo } = this.props;
+
+    const rideInfo = {
+      ownerEmail: userInfo.email,
+      ownerUsername: userInfo.username,
+      ownerPhoneNumber: userInfo.phoneNumber,
+      from: info.from,
+      to: info.to,
+      date: info.date,
+      seats: 4,
+      price: info.price,
+      detail: info.detail,
+      passengers: [],
+    };
+
+    axios.post('/rideList', {
+      rideInfo,
+    })
+      .then((response) => {
+        alert('posted!');
       })
       .catch((error) => {
         console.error(error);
@@ -47,13 +94,17 @@ class DriverPage extends Component {
 
   render () {
     const { rideHistory, upcomingRide } = this.state;
-    const { userInfo, logout, changePage, curPage } = this.props;
+    const { userInfo, logout, changePage, curPage, driveCancel } = this.props;
 
     return (
       <div className={style.DriverPage}>
-        <PostModule userInfo={userInfo} />
-        <RideHistory userInfo={userInfo} rideHistory={rideHistory} />
-        <UpcomingFeed userInfo={userInfo} upcomingRide={upcomingRide} />
+        <UpcomingFeed userInfo={userInfo} upcomingRide={upcomingRide} driveCancel={driveCancel} type="drive" />
+        <PostModule userInfo={userInfo} post={this.post} />
+        {rideHistory.length !== 0 ? (
+          <RideHistory userInfo={userInfo} rideHistory={rideHistory} cancel={this.cancel} />
+        ) : (
+          <EmptyPage page="driver" />
+        )}
       </div>
     );
   }

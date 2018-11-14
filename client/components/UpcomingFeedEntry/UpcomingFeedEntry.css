@@ -8,6 +8,10 @@
   text-decoration: underline;
 }
 
+.cancelBtn:hover {
+  opacity: 1;
+}
+
 .profilePic {
   display: inline-block;
   font-size: 50px;
@@ -16,7 +20,6 @@
 
 .detail {
   display: inline-block;
-  position: fixed;
   margin-top: 8px;
 }
 
@@ -28,3 +31,20 @@
   font-size: 12px;
 }
 
+.cancelBtn {
+  border: none;
+  font-size: 20px;
+  float: right;
+  margin-top: 20px;
+  color: red;
+  opacity: 0.3;
+  background-color: white;
+  cursor: pointer;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .cancelBtn {
+    opacity: 1;
+  }
+}

@@ -3,6 +3,7 @@
   top: 0;
   right: 0;
   left: 0;
+  z-index: 1;
   background-color: #8cd2ff;
   border-bottom: 1px solid #e4e4e4;
 }
@@ -57,12 +58,14 @@
 @media (min-width: 320px) and (max-width: 480px) {
   
   .header {
-    text-align: center;
+  }
+
+  .userBtn {
+    margin-right: 5%;
   }
 
   .logo {
-    /*display: inline-block;*/
-    margin-left: 0;
+    margin-left: 5%;
   }
 
   .botDivider {

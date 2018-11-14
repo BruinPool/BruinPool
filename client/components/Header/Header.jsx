@@ -6,7 +6,7 @@ class Header extends Component {
   constructor () {
     super()
 
-    this.onClick = this.onClick.bind(this);
+    this.onClick = this.onClick.bind(this); 
   }
 
   onClick () {
@@ -19,7 +19,7 @@ class Header extends Component {
     const { userInfo, curPage, changePage } = this.props;
 
     return (
-      <header className={style.header}>
+      <header className={style.header} style={curPage === 'rider' ? ({ backgroundColor: '#8cd2ff' }) : ({ backgroundColor: '#f7b400' })}>
         <div className={style.topDivider} />
         <div className={style.logo}>
           BruinPool

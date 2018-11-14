@@ -6,7 +6,8 @@ class RideHistoryEntry extends Component {
     super(props);
     this.state = {
       expand: false,
-    }
+      browserWidth: window.innerWidth,
+    };
     this.onClick = this.onClick.bind(this);
   }
 
@@ -21,23 +22,20 @@ class RideHistoryEntry extends Component {
       userInfo
     } = this.props;
 
-    const { expand } = this.state;
+    const { expand, browserWidth } = this.state;
 
-    if (expand) {
+    if (expand || browserWidth <= 480) {
       return (
         <div className={style.RideHistoryEntryExpanded}>
           <button className={style.expandBtn} type="button" onClick={this.onClick}>
-            ^
+            <i className="fas fa-angle-up" />
           </button>
-          <div className={style.ownerUsernameExpanded}>
-            {entry.ownerUsername}
+          <div className={style.statusExpanded}>
+            Completed
           </div>
           <div className={style.margin} />
           <div className={style.divider} />
           <div className={style.margin} />
-          <div className={style.seatsExpanded}>
-            {entry.seats} seats available
-          </div>
           <div className={style.head}>
             Destination
           </div>
@@ -51,7 +49,7 @@ class RideHistoryEntry extends Component {
           </div>
           <div className={style.margin} />
           <div className={style.entry}>
-            {entry.date.toLocaleDateString()}
+            {new Date(entry.date).toLocaleDateString()}
           </div>
           <div className={style.margin} />
           <div className={style.head}>
@@ -66,9 +64,9 @@ class RideHistoryEntry extends Component {
             {entry.detail}
           </div>
           <div className={style.margin} />
-          <button className={style.joinBtn} type="button" onClick={this.onClick}>
-            Join
-          </button>
+          <div className={style.passengers}>
+            Render passengers pic/username
+          </div>
         </div>
       );
     }
@@ -85,7 +83,7 @@ class RideHistoryEntry extends Component {
           {entry.to}
         </div>
         <div className={style.date}>
-          {entry.date.toLocaleDateString()}
+          {new Date(entry.date).toLocaleDateString()}
         </div>
         <div className={style.price}>
           {entry.price}

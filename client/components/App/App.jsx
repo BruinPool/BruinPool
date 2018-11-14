@@ -27,6 +27,7 @@ class App extends Component {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.changePage = this.changePage.bind(this);
+    this.driveCancel = this.driveCancel.bind(this);
   }
 
   login (data) {
@@ -45,7 +46,21 @@ class App extends Component {
     cookies.remove('userInfo');
     this.setState({
       userInfo: false,
+    });
+  }
+
+  driveCancel (ride) {
+    axios.delete('/rideList', {
+      params: {
+        ride,
+      },
     })
+      .then((res) => {
+        alert('deleted!');
+      })
+      .catch((err) => {
+        console.error(err);
+      })
   }
 
   fetchMore () {
@@ -75,10 +90,11 @@ class App extends Component {
 
   render () {
     const { userInfo, curPage } = this.state;
+    console.log(curPage)
 
     return (
       <div className={style.main}>
-        <Header userInfo={userInfo} logout={this.logout} changePage={this.changePage} curPage={curPage} />
+        {userInfo && <Header userInfo={userInfo} logout={this.logout} changePage={this.changePage} curPage={curPage} />}
         {curPage === 'rider' ? (
           <Redirect to="/rider" />
         ) : curPage === 'driver' ? (
@@ -103,8 +119,8 @@ class App extends Component {
             )
           }
         />
-        <Route path="/driver" render={() => <DriverPage userInfo={userInfo} logout={this.logout} changePage={this.changePage} curPage={curPage} />} />
-        <Route path="/rider" render={() => <RiderPage userInfo={userInfo} logout={this.logout} changePage={this.changePage} curPage={curPage} />} />
+        <Route path="/driver" render={() => <DriverPage userInfo={userInfo} logout={this.logout} changePage={this.changePage} curPage={curPage} driveCancel={this.driveCancel} />} />
+        <Route path="/rider" render={() => <RiderPage userInfo={userInfo} logout={this.logout} changePage={this.changePage} curPage={curPage} driveCancel={this.driveCancel} />} />
         <Route path="/myaccount" render={() => <MyAccount userInfo={userInfo} logout={this.logout} changePage={this.changePage} curPage={curPage} />} />
         <Route path="/loginPage" render={() => <LoginPage login={this.login} />} />
       </div>

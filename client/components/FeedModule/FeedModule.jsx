@@ -11,6 +11,7 @@ class FeedModule extends Component {
     const {
       rideFeed,
       userInfo,
+      cancel,
     } = this.props;
 
     return (
@@ -36,7 +37,7 @@ class FeedModule extends Component {
             Price
           </div>
         </div>
-        {rideFeed.map(entry => <FeedModuleEntry key={entry._id} entry={entry} userInfo={userInfo} />)}
+        {rideFeed.map(entry => <FeedModuleEntry key={entry._id} entry={entry} userInfo={userInfo} cancel={cancel} />)}
       </div>
     );
   }

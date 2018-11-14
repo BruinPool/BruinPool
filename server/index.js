@@ -10,17 +10,51 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../public'));
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/../public/index.html'), (err) => {
+app.get('/login', (req, res) => {
+  req.query.password = sha256(req.query.password);
+  db.login(req.query, (err, data) => {
     if (err) {
-      res.status(500).send(err);
+      res.sendStatus(500);
+    } else {
+      res.status(200).send(data);
     }
   });
 });
 
-app.get('/login', (req, res) => {
-  req.query.password = sha256(req.query.password);
-  db.login(req.query, (err, data) => {
+app.get('/rideList', (req, res) => {
+  db.getList(req.query, req.query.type, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+app.post('/rideList', (req, res) => {
+  db.postRide(req.body.rideInfo, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+app.put('/rideList', (req, res) => {
+  console.log(req.body.entry)
+  db.rideUpdate(req.body.entry, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+app.delete('/rideList', (req, res) => {
+  const ride = JSON.parse(req.query.ride);
+  db.rideDelete(ride._id, (err, data) => {
     if (err) {
       res.sendStatus(500);
     } else {
@@ -80,36 +114,6 @@ app.post('/signup', (req, res) => {
   });
 });
 
-app.get('/rideList', (req, res) => {
-  db.recentList(req.query.username, req.query.participations, req.query.query, (err, data) => {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      res.status(200).send(data);
-    }
-  });
-});
-
-app.post('/song', (req, res) => {
-  db.postSong(req.body, (err, result) => {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      res.status(200).send(result);
-    }
-  });
-});
-
-app.post('/updateSong', (req, res) => {
-  db.updateSong(req.body, (err, result) => {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      res.status(200).send(result);
-    }
-  });
-});
-
 app.post('/updateUser', (req, res) => {
   db.updateUser(req.body.email, req.body.username, req.body.vid_id, req.body.pull, (err, result) => {
     if (err) {
@@ -120,7 +124,15 @@ app.post('/updateUser', (req, res) => {
   });
 });
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../public/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
-app.listen(3000, () => {
-  console.log('listening on port 3000!');
+
+app.listen(80, () => {
+  console.log('listening on port 80!');
 });

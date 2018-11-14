@@ -1,5 +1,4 @@
 .HeaderDownMenu {
-  display: block;
   top: 0;
   right: 0;
   left: 0;
@@ -22,7 +21,7 @@ button:focus {
   text-align: center;
 }
 
-.btnOn {
+.riderbtnOn {
   border: 1px solid #e4e4e4;
   font-family: 'Quicksand', sans-serif;
   font-size: 20px;
@@ -34,7 +33,7 @@ button:focus {
   width: 100%;
 }
 
-.btnOff {
+.riderbtnOff {
   border: 1px solid #e4e4e4;
   font-family: 'Quicksand', sans-serif;
   font-size: 20px;
@@ -44,17 +43,48 @@ button:focus {
   border: none;
   cursor: pointer;
   width: 100%;
-  opacity: 0.5;
+  opacity: 0.3;
+}
+
+.driverbtnOn {
+  border: 1px solid #e4e4e4;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #f7b400;
+  background-color: white; 
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.driverbtnOff {
+  border: 1px solid #e4e4e4;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #f7b400;
+  background-color: white; 
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.3;
 }
 
 .btnContainer {
   display: inline-block;
-  width: 50%;
+  width: 25%;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
 
+  .HeaderDownMenu {
+    position: fixed;
+    top: unset;
+    bottom: 0;
+  }
+
   .btnContainer {
-    width: 33%;
+    width: 50%;
   }
 }

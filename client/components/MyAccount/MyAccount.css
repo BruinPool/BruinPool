@@ -62,3 +62,39 @@
   height: 30px;
   line-height: 40px;
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .profilePic {
+    height: 100px;
+    width: 100px;
+  }
+
+  .MyAccount {
+    width: 100%;
+    margin-top: 100px;
+  }
+
+  .userInfo {
+    width: 90%;
+    height: 150px;
+  }
+
+  .infoContainer {
+    height: 100%;
+  }
+
+  .btnWrapper {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 320px){
+  .infoContainer {
+    font-size: 13px;
+  }
+
+  .username {
+    font-size: 20px;
+  }
+}

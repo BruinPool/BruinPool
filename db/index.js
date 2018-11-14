@@ -28,6 +28,7 @@ const listSchema = mongoose.Schema({
   from: String,
   to: String,
   date: Date,
+  price: String,
   seats: Number,
   detail: String,
   passengers: Array,
@@ -36,31 +37,57 @@ const listSchema = mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 const List = mongoose.model('List', listSchema);
 
-const recentList = (username, participations, query, callback) => {
-  if (username) {
-    List.find({ ownerUsername: username }, (err, result) => {
+const getList = (query, type, callback) => {
+  if (type === 'list' && query.filter) {
+    const filter = JSON.parse(query.filter);
+
+    List.find({ from: filter.from, to: filter.to, date: { $gt: filter.date } }, (err, result) => {
       if (err) {
         callback(err, null);
       } else {
         callback(null, result);
       }
-    }).sort({ _id: -1 }).limit(8);
-  } else if (participations) {
-    List.find({ _id: { $in: participations } }, (err, result) => {
+    }).sort({ date: 1 }).limit(20);
+  } else if (type === 'driveHistory') {
+    const userInfo = JSON.parse(query.userInfo);
+
+    List.find({ ownerUsername: userInfo.username, date: { $lt: new Date() } }, (err, result) => {
       if (err) {
         callback(err, null);
       } else {
         callback(null, result);
       }
-    }).sort({ _id: -1 }).limit(8);
-  } else if (query) {
-    List.find({ name: query }, (err, result) => {
+    }).sort({ date: 1 }).limit(5);
+  } else if (type === 'driveUpcoming') {
+    const userInfo = JSON.parse(query.userInfo);
+
+    List.find({ ownerUsername: userInfo.username, date: { $gt: new Date() } }, (err, result) => {
       if (err) {
         callback(err, null);
       } else {
         callback(null, result);
       }
-    }).sort({ _id: -1 }).limit(8);
+    }).sort({ date: 1 }).limit(5);
+  } else if (type === 'rideHistory') {
+    const userInfo = JSON.parse(query.userInfo);
+
+    List.find({ passengers: userInfo.username, date: { $lt: new Date() } }, (err, result) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, result);
+      }
+    }).sort({ date: 1 }).limit(5);
+  } else if (type === 'rideUpcoming') {
+    const userInfo = JSON.parse(query.userInfo);
+
+    List.find({ passengers: userInfo.username, date: { $gt: new Date() } }, (err, result) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, result);
+      }
+    }).sort({ date: 1 }).limit(5);
   } else {
     List.find({}, (err, result) => {
       if (err) {
@@ -68,8 +95,18 @@ const recentList = (username, participations, query, callback) => {
       } else {
         callback(null, result);
       }
-    }).sort({ _id: -1 }).limit(8);
+    });
   }
+};
+
+const postRide = (rideInfo, callback) => {
+  List.create(rideInfo, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
 };
 
 const fetchMore = (multiplier, callback) => {
@@ -99,8 +136,19 @@ const postSong = (songInfo, callback) => {
   });
 };
 
-const updateSong = (updatedSong, callback) => {
-  List.findOneAndUpdate({ _id: updatedSong._id }, updatedSong, (err, result) => {
+const rideUpdate = (upadatedRide, callback) => {
+  List.findOneAndUpdate({ _id: upadatedRide._id }, upadatedRide, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
+
+const rideDelete = (id, callback) => {
+  console.log(id);
+  List.deleteOne({ _id: id }, (err, result) => {
     if (err) {
       callback(err, null);
     } else {
@@ -197,15 +245,17 @@ const post = (userInfo, callback) => {
 };
 
 module.exports = {
-  recentList,
   post,
   checkAvailability,
   login,
   postSong,
-  updateSong,
+  rideUpdate,
   emailValidation,
   usernameValidation,
   phoneNumberValidation,
   updateUser,
   fetchMore,
+  postRide,
+  getList,
+  rideDelete,
 };

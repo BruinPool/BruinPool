@@ -31,12 +31,12 @@ class HeaderDownMenu extends Component {
       <div className={style.HeaderDownMenu}>
         <div className={style.btns}>
           <div className={style.btnContainer}>
-            <button className={curPage === 'rider' ? (style.btnOn) : (style.btnOff)} name="rider" onClick={this.onClick}>
+            <button className={curPage === 'rider' ? (style.riderbtnOn) : (style.riderbtnOff)} name="rider" onClick={this.onClick}>
               Rider
             </button>
           </div>
           <div className={style.btnContainer}>
-            <button className={curPage === 'driver' ? (style.btnOn) : (style.btnOff)} name="driver" onClick={this.onClick}>
+            <button className={curPage === 'driver' ? (style.driverbtnOn) : (style.driverbtnOff)} name="driver" onClick={this.onClick}>
               Driver
             </button>
           </div>
