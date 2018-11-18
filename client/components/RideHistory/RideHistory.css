@@ -5,6 +5,17 @@
   font-size: 14px;
 }
 
+.fetchMoreDriveHistoryBtn {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #9e9e9e;
+  line-height: 20px;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
 .head {
   margin: auto auto 5px auto;
   height: 20px;

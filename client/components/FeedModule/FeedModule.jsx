@@ -5,6 +5,19 @@ import FeedModuleEntry from '../FeedModuleEntry/FeedModuleEntry';
 class FeedModule extends Component {
   constructor (props) {
     super(props);
+
+    this.onClick = this.onClick.bind(this);
+    this.filterCancel = this.filterCancel.bind(this);
+  }
+
+  onClick () {
+    const { fetchMoreRideFeed } = this.props;
+    fetchMoreRideFeed();
+  }
+
+  filterCancel() {
+    const { fetchRideFeed } = this.props;
+    fetchRideFeed(null);
   }
 
   render () {
@@ -12,6 +25,17 @@ class FeedModule extends Component {
       rideFeed,
       userInfo,
       cancel,
+      driveCancel,
+      toggleInfoModal,
+      toggleEditModal,
+      join,
+      edit,
+      fetchRideFeed,
+      fetchRideUpcoming,
+      driveFetch,
+      driveFetchUpcoming,
+      fetchProfilePic,
+      filter,
     } = this.props;
 
     return (
@@ -37,7 +61,17 @@ class FeedModule extends Component {
             Price
           </div>
         </div>
-        {rideFeed.map(entry => <FeedModuleEntry key={entry._id} entry={entry} userInfo={userInfo} cancel={cancel} />)}
+        {filter && (
+          <div className={style.cancelFilterBox}>
+            <button className={style.cancelFilterBtn} type="button" onClick={this.filterCancel}>
+              Clear filter  <i className="fas fa-times-circle" />
+            </button>
+          </div>
+        )}
+        {rideFeed.map(entry => <FeedModuleEntry key={entry._id} join={join} fetchProfilePic={fetchProfilePic} fetchRideFeed={fetchRideFeed} toggleInfoModal={toggleInfoModal} fetchRideUpcoming={fetchRideUpcoming} driveFetch={driveFetch} driveFetchUpcoming={driveFetchUpcoming} entry={entry} userInfo={userInfo} edit={edit} cancel={cancel} driveCancel={driveCancel} toggleEditModal={toggleEditModal} />)}
+        <button className={style.fetchMoreRideFeedBtn} type="button" onClick={this.onClick} >
+          Load more
+        </button>
       </div>
     );
   }

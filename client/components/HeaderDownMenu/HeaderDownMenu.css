@@ -31,6 +31,7 @@ button:focus {
   border: none;
   cursor: pointer;
   width: 100%;
+  text-decoration: unset;
 }
 
 .riderbtnOff {
@@ -44,6 +45,7 @@ button:focus {
   cursor: pointer;
   width: 100%;
   opacity: 0.3;
+  text-decoration: unset;
 }
 
 .driverbtnOn {
@@ -56,6 +58,7 @@ button:focus {
   border: none;
   cursor: pointer;
   width: 100%;
+  text-decoration: unset;
 }
 
 .driverbtnOff {
@@ -69,6 +72,7 @@ button:focus {
   cursor: pointer;
   width: 100%;
   opacity: 0.3;
+  text-decoration: unset;
 }
 
 .btnContainer {

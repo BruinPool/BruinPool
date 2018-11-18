@@ -43,9 +43,9 @@ class FilterModule extends Component {
   }
 
   onClick () {
-    const { fetch } = this.props;
+    const { fetchRideFeed } = this.props;
     const { from, to, date } = this.state;
-    fetch({ from: from.label, to: to.label, date });
+    fetchRideFeed({ from: from.label, to: to.label, date });
   }
 
   render () {
@@ -88,7 +88,7 @@ class FilterModule extends Component {
           <div className={style.margin} />
           <div className={style.dateWrapper}>
             <label>
-              Date
+              Date / Time
               <div>
                 <DatePicker
                   className={style.dateInput}
@@ -97,6 +97,8 @@ class FilterModule extends Component {
                   onChange={this.handleDate}
                   minDate={moment()}
                   showDisabledMonthNavigation
+                  showTimeSelect
+                  dateFormat="MM/DD LT"
                 />
               </div>
             </label>

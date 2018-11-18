@@ -11,13 +11,60 @@
   height: 200px;
 }
 
-.profilePic {
-  display: inline-block;
-  height: 200px;
+.profilePicBox {
+  position: relative;
   width: 200px;
-  border-radius: 100px;
-  background-color: black;
+  height: 200px;
+  display: inline-block;
   margin-right: 20%;
+  cursor: pointer;
+}
+
+.profilePicBox:hover .profilePic {
+  opacity: 0.2;
+}
+
+.profilePicBox:hover .hoverLogoBox {
+  opacity: 1;
+}
+
+.profilePic {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+}
+
+.uploadBtn {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 100px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.signOutBtn {
+  font-size: 15px;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  line-height: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.hoverLogoBox {
+  opacity: 0;
+  display: grid;
+  width: 200px;
+  height: 200px;
+}
+
+.hoverLogo {
+  position: relative;
+  margin: auto;
+  font-size: 25px;
 }
 
 .infoContainer {
@@ -58,16 +105,53 @@
   cursor: pointer;
 }
 
-.btnWrapper {
+.driveBtnWrapper {
+  background-image: url("https://s3-us-west-1.amazonaws.com/bruinpoolprofilepics/bucketFolder/Driver+Transparent.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 30px;
   height: 30px;
   line-height: 40px;
+  z-index: 1;
+  font-size: 15px;
+  border: none;
+  background-color: unset;
+  cursor: pointer;
+}
+
+.rideBtnWrapper {
+  height: 30px;
+  line-height: 40px;
+  z-index: 1;
+  font-size: 15px;
+  border: none;
+  background-color: unset;
+  cursor: pointer;
+}
+
+.mobileBtnImg {
+  border-radius: 5px;
+  border: 0.5px solid #dcdcdc;
+  padding: 3px;
+  width: 30px;
+  height: 30px;
+  margin-top: 10%;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
 
-  .profilePic {
+  .profilePicBox {
     height: 100px;
     width: 100px;
+  }
+
+  .hoverLogoBox {
+    height: 100px;
+    width: 100px;
+  }
+
+  .hoverLogo {
+    font-size: unset;
   }
 
   .MyAccount {

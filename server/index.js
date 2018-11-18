@@ -3,6 +3,37 @@ const bodyParser = require('body-parser');
 const sha256 = require('js-sha256');
 const path = require('path');
 const db = require('../db');
+require('dotenv').config();
+
+const S3_BUCKET = process.env.S3_BUCKET;
+const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
+const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
+console.log(S3_BUCKET)
+
+const AWS = require('aws-sdk');
+const fs = require('fs');
+const fileType = require('file-type');
+const bluebird = require('bluebird');
+const multiparty = require('multiparty');
+
+AWS.config.update({
+  accessKeyId: AWS_ACCESS_KEY_ID,
+  secretAccessKey: AWS_SECRET_ACCESS_KEY,
+});
+
+AWS.config.setPromisesDependency(bluebird);
+const s3 = new AWS.S3();
+
+const uploadFile = (buffer, name, type) => {
+  const params = {
+    ACL: 'public-read',
+    Body: buffer,
+    Bucket: S3_BUCKET,
+    ContentType: type.mime,
+    Key: `${name}.${type.ext}`
+  };
+  return s3.upload(params).promise();
+};
 
 const app = express();
 
@@ -10,9 +41,38 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../public'));
 
+app.post('/upload-profile-pic', (req, res) => {
+  const form = new multiparty.Form();
+  form.parse(req, async (error, fields, files) => {
+    if (error) throw new Error(error);
+    try {
+      const path = files.file[0].path;
+      const buffer = fs.readFileSync(path);
+      const type = fileType(buffer);
+      const timestamp = Date.now().toString();
+      const fileName = `bucketFolder/${timestamp}-lg`;
+      const data = await uploadFile(buffer, fileName, type);
+      db.uploadPicUrl(req.headers.userid, data.Location, (err, result) => {
+        console.log(result);
+        if (err) {
+          return res.sendStatus(501);
+        } else {
+          return res.sendStatus(200);
+        }
+      })
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send(error);
+    }
+  });
+});
+
 app.get('/login', (req, res) => {
-  req.query.password = sha256(req.query.password);
-  db.login(req.query, (err, data) => {
+  if (req.query.password) {
+    req.query.password = sha256(req.query.password);
+  }
+  const newToken = sha256((new Date()).toString());
+  db.login(req.query, newToken, (err, data) => {
     if (err) {
       res.sendStatus(500);
     } else {
@@ -22,7 +82,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/rideList', (req, res) => {
-  db.getList(req.query, req.query.type, (err, data) => {
+  db.getList(req.query, req.query.type, req.query.pageNum, (err, data) => {
     if (err) {
       res.sendStatus(500);
     } else {
@@ -42,8 +102,7 @@ app.post('/rideList', (req, res) => {
 });
 
 app.put('/rideList', (req, res) => {
-  console.log(req.body.entry)
-  db.rideUpdate(req.body.entry, (err, data) => {
+  db.rideUpdate(req.body.entry, req.body.username, req.body.status, (err, data) => {
     if (err) {
       res.sendStatus(500);
     } else {
@@ -59,6 +118,37 @@ app.delete('/rideList', (req, res) => {
       res.sendStatus(500);
     } else {
       res.status(200).send(data);
+    }
+  });
+});
+
+app.get('/usersPic', (req, res) => {
+  db.getPicUrl(req.query.username, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
+
+app.get('/notification', (req, res) => {
+  const authToken = JSON.parse(req.query.authToken);
+  db.getNoti(authToken.email, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
+
+app.put('/notification', (req, res) => {
+  db.updateNoti(req.body.email, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.status(201).send(data);
     }
   });
 });
@@ -133,6 +223,6 @@ app.get('/*', (req, res) => {
 });
 
 
-app.listen(3000, () => {
-  console.log('listening on port 3000!');
+app.listen(process.env.PORT || 3000, () => {
+  console.log('listening!');
 });

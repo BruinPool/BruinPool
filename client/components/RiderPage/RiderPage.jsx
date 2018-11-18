@@ -3,6 +3,7 @@ import style from './RiderPage.css';
 import FilterModule from '../FilterModule/FilterModule';
 import FeedModule from '../FeedModule/FeedModule';
 import UpcomingFeed from '../UpcomingFeed/UpcomingFeed';
+import Header from '../Header/Header';
 import { feed, upcoming } from '../mockData';
 
 const axios = require('axios');
@@ -11,81 +12,24 @@ class RiderPage extends Component {
   constructor () {
     super();
     this.state = {
-      rideFeed: [],
-      upcomingRide: [],
+      curPage: 'rider',
     };
-
-    this.fetch = this.fetch.bind(this);
-    this.fetchUpcoming = this.fetchUpcoming.bind(this);
-    this.cancel = this.cancel.bind(this);
   }
 
   componentWillMount () {
-    this.fetch(null);
-    this.fetchUpcoming();
-  }
-
-  fetch (filter) {
-    axios.get('/rideList', {
-      params: {
-        filter,
-        type: 'list',
-      },
-    })
-      .then((res) => {
-        this.setState({
-          rideFeed: res.data,
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-
-  fetchUpcoming () {
-    const { userInfo } = this.props;
-
-    axios.get('/rideList', {
-      params: {
-        userInfo,
-        type: 'rideUpcoming',
-      },
-    })
-      .then((res) => {
-        this.setState({
-          upcomingRide: res.data,
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-
-  cancel (entry) {
-    const { userInfo } = this.props;
-    const ind = entry.passengers.indexOf(userInfo.username);
-    entry.passengers.splice(ind, 1);
-
-    axios.put('/rideList', {
-      entry,
-    })
-      .then((response) => {
-        alert('canceld!');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const { fetchRideUpcoming } = this.props;
+    fetchRideUpcoming();
   }
 
   render () {
-    const { rideFeed, upcomingRide } = this.state;
-    const { userInfo } = this.props;
-
+    const { curPage } = this.state;
+    const { userInfo, filter, logout, fetchRideFeed, fetchProfilePic, fetchRideUpcoming, fetchMoreRideFeed, join, toggleEditModal, toggleInfoModal, cancel, upcomingRide, rideFeed, newNoti, oldNoti, clearNotification } = this.props;
     return (
       <div className={style.RiderPage}>
-        <UpcomingFeed userInfo={userInfo} upcomingRide={upcomingRide} rideCancel={this.cancel} type="ride" />
-        <FilterModule fetch={this.fetch} />
-        <FeedModule userInfo={userInfo} rideFeed={rideFeed} cancel={this.cancel} />
+        <Header userInfo={userInfo} logout={logout} curPage={curPage} newNoti={newNoti} oldNoti={oldNoti} clearNotification={clearNotification} />
+        <UpcomingFeed fetchProfilePic={fetchProfilePic} userInfo={userInfo} join={join} fetchRideFeed={fetchRideFeed} fetchRideUpcoming={fetchRideUpcoming} upcomingRide={upcomingRide} rideCancel={cancel} type="ride" toggleInfoModal={toggleInfoModal} />
+        <FilterModule fetchRideFeed={fetchRideFeed} />
+        <FeedModule fetchProfilePic={fetchProfilePic} filter={filter} userInfo={userInfo} join={join} rideFeed={rideFeed} fetchMoreRideFeed={fetchMoreRideFeed} fetchRideFeed={fetchRideFeed} fetchRideUpcoming={fetchRideUpcoming} cancel={cancel} toggleInfoModal={toggleInfoModal} toggleEditModal={toggleEditModal} />
       </div>
     );
   }

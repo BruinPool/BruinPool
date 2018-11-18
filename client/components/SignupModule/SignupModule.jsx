@@ -153,6 +153,7 @@ class SignupModule extends Component {
       username,
       phoneNumber,
     } = this.state;
+    const { login } = this.props;
 
     e.preventDefault();
 
@@ -163,7 +164,7 @@ class SignupModule extends Component {
       phoneNumber,
       posting_list: [],
       participate: [],
-      picUrl: '',
+      picUrl: 'https://s3-us-west-1.amazonaws.com/bruinpoolprofilepics/bucketFolder/Bear+without+wheel+BLACK.png',
       webandList: [],
       ownedWeband: [],
     })
@@ -171,23 +172,8 @@ class SignupModule extends Component {
         if (response.status === 200) {
           alert('Username or Password in use');
         } else {
-          alert('Welcome to WePlay!');
-          axios.get('/login', {
-            params: {
-              email: email,
-              password: password
-            }
-          })
-            .then((res) => {
-              if (res.data.length === 0) {
-                alert('Email or password is incorrect')
-              } else {
-                this.props.login(res.data[0]);
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
+          alert('Welcome to BruinPool!');
+          login(email, password);
         }
       })
       .catch((error) => {

@@ -5,12 +5,19 @@ import RideHistoryEntry from '../RideHistoryEntry/RideHistoryEntry';
 class RideHistory extends Component {
   constructor (props) {
     super(props);
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick () {
+    const { fetchMoreDriveHistory } = this.props;
+    fetchMoreDriveHistory();
   }
 
   render () {
     const {
-      rideHistory,
-      userInfo
+      driveHistory,
+      userInfo,
     } = this.props;
 
     return (
@@ -36,7 +43,10 @@ class RideHistory extends Component {
             Price
           </div>
         </div>
-        {rideHistory.map(entry => <RideHistoryEntry key={entry._id} entry={entry} userInfo={userInfo} />)}
+        {driveHistory.map(entry => <RideHistoryEntry key={entry._id} entry={entry} userInfo={userInfo} />)}
+        <button className={style.fetchMoreDriveHistoryBtn} type="button" onClick={this.onClick} >
+          Load more
+        </button>
       </div>
     );
   }

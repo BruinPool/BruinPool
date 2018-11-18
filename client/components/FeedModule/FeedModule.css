@@ -5,10 +5,21 @@
   font-size: 14px;
 }
 
+.fetchMoreRideFeedBtn {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #9e9e9e;
+  line-height: 20px;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
 .head {
   margin: auto auto 5px auto;
   height: 20px;
-  border: 1px solid #ff153c;
+  border: 1px solid #e4e4e4;
   border-radius: 5px;
   background-color: white;
   padding: 10px;
@@ -43,6 +54,30 @@
 .divider {
   display: inline-block;
   /*width: 8%;*/
+}
+
+.cancelFilterBox {
+  margin: auto auto 5px auto;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  background-color: #ff4350;
+  color: white;
+  margin: auto auto 5px auto;
+  height: 16px;
+  border: 1px solid #e4e4e4;
+  padding: 3px;
+}
+
+.cancelFilterBtn {
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: white;
+  padding: unset;
+  margin-left: 5px;
+  /* line-height: 12px; */
+  background-color: #ff4350;
+  float: right; 
 }
 
 @media (min-width: 320px) and (max-width: 480px) {

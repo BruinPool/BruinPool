@@ -20,29 +20,14 @@ class LoginModule extends Component {
   }
 
   loginHandler (e) {
+    const { login } = this.props;
     const {
       email,
-      password
+      password,
     } = this.state;
 
     e.preventDefault();
-    axios.get('/login', {
-      params: {
-        email,
-        password,
-      },
-    })
-      .then((response) => {
-        if (response.data.length === 0) {
-          alert('Email or password is incorrect');
-        } else {
-          alert(`welcome back ${response.data[0].username}`);
-          this.props.login(response.data[0]);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    login(email, password);
   }
 
   render () {

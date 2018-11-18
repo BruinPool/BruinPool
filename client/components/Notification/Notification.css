@@ -1,0 +1,31 @@
+.notiBox {
+  position: absolute;
+  right: 16%;
+  border: 1px solid #e5ecf1;
+  border-radius: 5px;
+  background-color: white;
+  z-index: 1;
+  width: 30%;
+  padding: 0 0.5% 0 0.5%;
+}
+
+.notiHead {
+  margin: 1% 0 1% 0;
+}
+
+.noti {
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-left: 2%;
+}
+
+.divider {
+  border-top: 1px solid #e5ecf1;
+}
+
+@media (min-width: 320px) and (max-width: 480px){
+  .notiBox {
+    right: unset;
+    width: 100%;
+  }
+}

@@ -45,11 +45,11 @@ class RideHistoryEntry extends Component {
           </div>
           <div className={style.margin} />
           <div className={style.head}>
-            Date
+            Date/Time
           </div>
           <div className={style.margin} />
           <div className={style.entry}>
-            {new Date(entry.date).toLocaleDateString()}
+            {new Date(entry.date).toLocaleString().replace(/:\d{2}\s/, ' ')}
           </div>
           <div className={style.margin} />
           <div className={style.head}>

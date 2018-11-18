@@ -19,7 +19,9 @@ class MyAccountFeedEntry extends Component {
       <div className={style.MyAccountFeedEntry}>
         <div className={style.detail}>
           <div className={style.destination}>
-            {`${entry.from} to ${entry.to}`}
+            {entry.from} to
+            <br />
+            {entry.to}
           </div>
           <div className={style.margin} />
           <div className={style.date}>

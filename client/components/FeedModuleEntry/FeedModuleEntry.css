@@ -18,6 +18,10 @@
   cursor: pointer;
 }
 
+.modal {
+  border: none !important;
+}
+
 .FeedModuleEntryExpanded {
   padding: 10px;
   margin: auto auto 5px auto;
@@ -32,15 +36,36 @@
   animation: fadeIn 1s ease;
 }
 
-.profilePic {
-  font-size: 30px;
+.passengersInfoBox {
+  float: right;
+  margin-right: 20%;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.passengerInfo {
+  font-size: 14px;
+  font-weight: unset;
+}
+
+.profilePicBox {
   display: inline-block;
+  position: relative;
+}
+
+.profilePic {
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
   margin-right: 5px;
+  border: 0.5px solid #ff4350;
 }
 
 .ownerUsernameExpanded {
-  font-size: 18px;
+  font-size: 20px;
   display: inline-block;
+  position: absolute;
+  line-height: 35px;
 }
 
 .seats {

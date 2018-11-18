@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import style from './FeedModuleEntry.css';
 
 const axios = require('axios');
@@ -9,11 +10,24 @@ class FeedModuleEntry extends Component {
     this.state = {
       expand: false,
       browserWidth: window.innerWidth,
+      picUrl: '',
     };
 
     this.toggle = this.toggle.bind(this);
     this.join = this.join.bind(this);
     this.cancelHandle = this.cancelHandle.bind(this);
+    this.driveCancelHandle = this.driveCancelHandle.bind(this);
+    this.editHandle = this.editHandle.bind(this);
+  }
+
+  componentDidMount () {
+    const { isModal, fetchProfilePic, entry } = this.props;
+    if (isModal) {
+      this.setState({ expand: true });
+    }
+    fetchProfilePic(entry.ownerUsername, (picUrl) => {
+      this.setState({ picUrl });
+    })
   }
 
   toggle () {
@@ -22,51 +36,60 @@ class FeedModuleEntry extends Component {
   }
 
   join () {
-    const { entry, userInfo } = this.props;
-    entry.passengers.push(userInfo.username);
-
-    axios.put('/rideList', {
-      entry,
-    })
-      .then((response) => {
-        alert('joined!');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const { join, entry } = this.props;
+    join(entry);
   }
 
   cancelHandle () {
     const { entry, cancel } = this.props;
-
     cancel(entry);
+
+  }
+
+  driveCancelHandle () {
+    const { entry, driveCancel } = this.props;
+    driveCancel(entry);
+  }
+
+  editHandle () {
+    const { toggleEditModal, toggleInfoModal, entry } = this.props;
+    toggleInfoModal(false);
+    toggleEditModal(entry);
   }
 
   render () {
     const {
       entry,
-      userInfo
+      userInfo,
+      isModal,
     } = this.props;
 
-    const { expand, browserWidth } = this.state;
+    const { expand, browserWidth, picUrl } = this.state;
     const myRide = entry.passengers.includes(userInfo.username);
     const myDrive = entry.ownerUsername === userInfo.username;
+    let expandStyle;
+    if (isModal) {
+      expandStyle = style.modal;
+    } else {
+      expandStyle = style.FeedModuleEntryExpanded;
+    }
+
     if (expand || browserWidth <= 480) {
       return (
         <div
-        className={style.FeedModuleEntryExpanded}
+        className={expandStyle}
         style={myRide ? ({ border: '1px solid #477a9b' }) : myDrive ? ({ border: '1px solid #f7b400' }) : ({ border: '1px solid #e4e4e4' })}
         >
-          {browserWidth > 480 && (
+          {(browserWidth > 480 && !isModal) && (
             <button className={style.expandBtn} type="button" onClick={this.toggle}>
               <i className="fas fa-angle-up" />
             </button>
           )}
-          <div className={style.profilePic}>
-            <i className="fas fa-user-circle" />
-          </div>
-          <div className={style.ownerUsernameExpanded}>
-            {entry.ownerUsername}
+          <div className={style.profilePicBox}>
+            <img className={style.profilePic} src={picUrl} />
+            <div className={style.ownerUsernameExpanded}>
+              {entry.ownerUsername}
+            </div>
           </div>
           <div className={style.margin} />
           <div className={style.divider} />
@@ -78,6 +101,19 @@ class FeedModuleEntry extends Component {
               `${entry.seats - entry.passengers.length} seats available`
             )}
           </div>
+          {myDrive && (
+            <div className={style.passengersInfoBox}>
+              Ridees
+              <div className={style.margin} />
+              {entry.passengers.map((passenger) => {
+                return (
+                  <div className={style.passengerInfo} name={passenger}>
+                    {passenger}
+                  </div>
+                );
+              })}
+            </div>
+          )}
           <div className={style.head}>
             Destination
           </div>
@@ -87,11 +123,11 @@ class FeedModuleEntry extends Component {
           </div>
           <div className={style.margin} />
           <div className={style.head}>
-            Date
+            Date/Time
           </div>
           <div className={style.margin} />
           <div className={style.entry}>
-            {new Date(entry.date).toLocaleDateString()}
+            {new Date(entry.date).toLocaleString().replace(/:\d{2}\s/, ' ')}
           </div>
           <div className={style.margin} />
           <div className={style.head}>
@@ -109,11 +145,11 @@ class FeedModuleEntry extends Component {
           <div className={style.margin} />
           {myDrive ? (
             <div>
-              <button className={style.driveEditBtn} type="button" onClick={this.cancelHandle}>
+              <button className={style.driveEditBtn} type="button" onClick={this.editHandle}>
                 Edit
               </button>
               <div className={style.marginBtn} />
-              <button className={style.driveCancelBtn} type="button" onClick={this.cancelHandle}>
+              <button className={style.driveCancelBtn} type="button" onClick={this.driveCancelHandle}>
                 Cancel
               </button>
             </div>

@@ -31,7 +31,7 @@ class PostModule extends Component {
   }
 
   onClick () {
-    const { post } = this.props;
+    const { post, entry } = this.props;
     const {
       from,
       to,
@@ -41,14 +41,26 @@ class PostModule extends Component {
       price,
       detail,
     } = this.state;
-    post({
-      from: from.label,
-      to: to.label,
-      date,
-      time,
-      price,
-      detail,
-    });
+    if (entry) {
+      entry.from = from.label;
+      entry.to = to.label;
+      entry.date = date;
+      entry.time = time;
+      entry.seats = seats;
+      entry.price = price;
+      entry.detail = detail;
+      post(entry);
+    } else {
+      post({
+        from: from.label,
+        to: to.label,
+        date,
+        time,
+        seats,
+        price,
+        detail,
+      });
+    }
   }
 
   handleFrom (val) {
@@ -72,15 +84,27 @@ class PostModule extends Component {
       from,
       to,
       date,
-      time,
       seats,
       price,
       detail,
       destination,
     } = this.state;
 
+    const { entry } = this.props;
+
+    const moduleStyle = {
+      position: 'fixed',
+      width: '315px',
+      marginLeft: '10%',
+      backgroundColor: 'white',
+      border: '1px solid #e4e4e4',
+      borderRadius: '5px',
+      padding: '10px',
+      marginTop: 'unset',
+    };
+
     return (
-      <div className={style.PostModule}>
+      <div className={style.PostModule} style={!entry ? (moduleStyle) : ({})}>
         <form>
           <div className={style.fromWrapper}>
             <label>
@@ -111,7 +135,7 @@ class PostModule extends Component {
           <div className={style.margin} />
           <div className={style.dateWrapper}>
             <label>
-              Date
+              Date / Time
               <div>
                 <DatePicker
                   className={style.dateInput}
@@ -120,6 +144,8 @@ class PostModule extends Component {
                   onChange={this.handleDate}
                   minDate={moment()}
                   showDisabledMonthNavigation
+                  showTimeSelect
+                  dateFormat="MM/DD LT"
                 />
               </div>
             </label>
@@ -145,14 +171,14 @@ class PostModule extends Component {
             <label>
               Detail
               <div>
-                <textarea className={style.detailInput} name="detail" value={detail} onChange={this.handleChange} />
+                <textarea className={style.detailInput} name="detail" value={detail} onChange={this.handleChange} placeholder="Enter pickup/drop off locations, etc.." />
               </div>
             </label>
           </div>
         </form>
         <div className={style.margin} />
         <button className={style.postBtn} type="button" onClick={this.onClick}>
-          Post a ride
+          {entry ? ('Save') : ('Post a Ride')}
         </button>
       </div>
     );

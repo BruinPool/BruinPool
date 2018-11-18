@@ -33,7 +33,7 @@
 
 .userBtn {
   float: right;
-  margin-right: 16%;
+  margin-right: 1%;
   line-height: 20px;
   cursor: pointer;
 }
@@ -42,9 +42,14 @@
   text-decoration: underline;
 }
 
-.profilePic {
-  font-size: 35px;
+.profilePicBox {
   display: inline-block;
+}
+
+.profilePic {
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
 }
 
 .username {
@@ -54,6 +59,29 @@
   margin-right: 5px;
   color: white;
 }
+.notiBtnDesktopBox {
+  float: right;
+  border: none;
+  margin-right: 16%;
+}
+
+.notiBtnDesktop {
+  width: 32px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.notiBtnMobileBox {
+  background-color: #8cd2ff;
+  float: right;
+  border: none;
+  margin-right: 16%;
+}
+
+.notiBtnMobile {
+  width: 32px;
+  height: 34px;
+}
 
 @media (min-width: 320px) and (max-width: 480px) {
   
@@ -61,11 +89,19 @@
   }
 
   .userBtn {
-    margin-right: 5%;
+    margin-right: 0.5%;
+  }
+
+  .username {
+    display: none;
+  }
+
+  .notiBtnDesktopBox {
+    margin-right: 3%;
   }
 
   .logo {
-    margin-left: 5%;
+    margin-left: 3%;
   }
 
   .botDivider {

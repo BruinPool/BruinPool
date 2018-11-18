@@ -1,11 +1,5 @@
 .PostModule {
-  position: fixed;
-  width: 315px;
-  margin-left: 10%;
-  background-color: white;
-  border: 1px solid #e4e4e4;
-  border-radius: 5px;
-  padding: 10px;
+  margin-top: 15px;
 }
 
 .margin {
@@ -14,14 +8,19 @@
 
 .dateWrapper {
   display: inline-block;
+  width: 30%;
+  margin-right: 5%;
 }
 
 .seatsWrapper {
   display: inline-block;
+  width: 30%;
+  margin-right: 5%;
 }
 
 .priceWrapper {
   display: inline-block;
+  width: 30%;
 }
 
 .detailInput {
@@ -61,7 +60,7 @@
 
 .dateInput {
   font-size: 12px;
-  width: 100px;
+  width: 100%;
   margin-right: 7.5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -95,7 +94,7 @@
 
 .seatsInput {
   font-size: 12px;
-  width: 100px;
+  width: 100%;
   margin-right: 7.5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -129,7 +128,7 @@
 
 .priceInput {
   font-size: 12px;
-  width: 100px;
+  width: 100%;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -178,11 +177,11 @@
 @media (min-width: 320px) and (max-width: 480px) {
 
   .PostModule {
-    position: relative;
-    width: 96%;
-    margin-top: 5px;
-    margin-right: unset;
-    padding: 2%;
-    margin-left: unset;
+    position: relative !important;
+    width: 96% !important;
+    margin-top: 5px !important;
+    margin-right: unset !important;
+    padding: 2% !important;
+    margin-left: unset !important;
   }
 }
