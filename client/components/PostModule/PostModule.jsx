@@ -17,9 +17,11 @@ class PostModule extends Component {
       price: '',
       detail: '',
       destination: [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
+        { value: 'SF Bay Area', label: 'SF Bay Area' },
+        { value: 'Davis', label: 'Davis' },
+        { value: 'Santa Barbara', label: 'Santa Barbara' },
+        { value: 'Orange County', label: 'Orange County' },
+        { value: 'San Diego', label: 'San Diego' },
       ],
     };
 
@@ -171,7 +173,7 @@ class PostModule extends Component {
             <label>
               Detail
               <div>
-                <textarea className={style.detailInput} name="detail" value={detail} onChange={this.handleChange} placeholder="Enter pickup/drop off locations, etc.." />
+                <textarea className={style.detailInput} name="detail" value={detail} onChange={this.handleChange} placeholder="Enter details" />
               </div>
             </label>
           </div>
