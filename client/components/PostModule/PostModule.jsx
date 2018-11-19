@@ -173,7 +173,7 @@ class PostModule extends Component {
             <label>
               Detail
               <div>
-                <textarea className={style.detailInput} name="detail" value={detail} onChange={this.handleChange} placeholder="Enter details" />
+                <textarea className={style.detailInput} name="detail" value={detail} onChange={this.handleChange} placeholder="Detailed pickup/dropoff location, phone number, etc." />
               </div>
             </label>
           </div>
