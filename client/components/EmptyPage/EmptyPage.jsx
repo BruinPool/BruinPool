@@ -5,9 +5,9 @@ class EmptyPage extends Component {
   render () {
     const { page } = this.props;
 
-    return (
-      <div className={style.EmptyPage}>
-        {page === 'driver' ? (
+    if (page === 'driver') {
+      return (
+        <div className={style.driverPage}>
           <div className={style.outerWrapper}>
             <div className={style.innerWrapper}>
               <i className="fas fa-car-side" />
@@ -16,16 +16,20 @@ class EmptyPage extends Component {
               </div>
             </div>
           </div>
-        ) : (
-          <div className={style.outerwrapper}>
-            <div className={style.innerWrapper}>
-              <i className="fas fa-car-side" />
-              <div className={style.logo}>
-                Drive Mor!
-              </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={style.riderPage}>
+        <div className={style.outerWrapperRider}>
+          <div className={style.innerWrapper}>
+            <i className="fas fa-car-side" />
+            <div className={style.logo}>
+              No result
             </div>
           </div>
-        )}
+        </div>
       </div>
     );
   }

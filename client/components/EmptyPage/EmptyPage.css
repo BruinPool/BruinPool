@@ -1,8 +1,14 @@
-.EmptyPage {
+.driverPage {
   width: 32%;
   margin: auto;
   padding-left: 2.5%;
   height: 500px;
+  text-align: center;
+}
+
+.riderPage {
+  margin: auto;
+  margin-bottom: 5px;
   text-align: center;
 }
 
@@ -15,7 +21,30 @@
   font-size: 50px;
 }
 
+.outerWrapperRider {
+  display: grid;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 50px;
+}
+
 .innerWrapper {
+  grid-column: 1 / 2;
+  grid-row: 2 /3;
+  opacity: 0.4;
+}
+
+.outerWrapperRider {
+  display: grid;
+  height: 500px;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 50px;
+}
+
+.innerWrapperRider {
   grid-column: 1 / 2;
   grid-row: 2 /3;
   opacity: 0.4;
@@ -27,8 +56,13 @@
 
 @media (min-width: 320px) and (max-width: 480px) {
 
-  .EmptyPage {
+  .driverPage {
     width: 100%;
+    padding: 0;
+    margin-top: 3%;
+  }
+
+  .riderPage {
     padding: 0;
     margin-top: 3%;
   }

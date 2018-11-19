@@ -190,7 +190,7 @@ class App extends Component {
 
     axios.put('/rideList', {
       entry,
-      username: userInfo.username,
+      userInfo,
       status: 'join',
     })
       .then((response) => {
@@ -211,7 +211,7 @@ class App extends Component {
 
     axios.put('/rideList', {
       entry,
-      username: userInfo.username,
+      userInfo,
       status: 'cancel',
     })
       .then((response) => {

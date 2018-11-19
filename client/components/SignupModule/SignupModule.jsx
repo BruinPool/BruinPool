@@ -71,7 +71,7 @@ class SignupModule extends Component {
       this.setState({ usernameValidation: -1 });
       return;
     }
-    if (e.target.value.length < 5 || e.target.value.length > 10) {
+    if (e.target.value.length < 4 || e.target.value.length > 10) {
       this.setState({ usernameValidation: 2 });
       return;
     }
@@ -196,8 +196,8 @@ class SignupModule extends Component {
     return (
       <div className={style.mainContainer}>
         <div className={style.signupDescription}>
-          Riders<br />
-          Ridees
+          Bruin Pool<br />
+          Best Pool
         </div>
         <div className={style.divideLine} />
         <form className={style.singupContainer} onSubmit={this.singupHandler}>

@@ -39,6 +39,8 @@ const listSchema = mongoose.Schema({
 const notiSchema = mongoose.Schema({
   email: String,
   msg: String,
+  passengerPhoneNumber: String,
+  passengerEmail: String,
   viewed: Boolean,
 });
 
@@ -191,24 +193,30 @@ const fetchMore = (multiplier, callback) => {
   }).sort({ _id: -1 }).skip(multiplier * 18).limit(18);
 };
 
-const rideUpdate = (upadatedRide, username, status, callback) => {
+const rideUpdate = (upadatedRide, userInfo, status, callback) => {
   const noti = {
     email: upadatedRide.ownerEmail,
-    msg: `${username} has ${status}ed a ride`,
+    msg: `${userInfo.username} has ${status}ed a ride`,
+    passengerPhoneNumber: userInfo.phoneNumber,
+    passengerEmail: userInfo.email,
     viewed: false,
   };
 
-  List.findOneAndUpdate({ _id: upadatedRide._id }, upadatedRide, { new: true }, (err1, result1) => {
+  List.findOneAndUpdate({ _id: upadatedRide._id, seats: { $gte: upadatedRide.passengers.length} }, upadatedRide, { new: true }, (err1, result1) => {
     if (err1) {
       callback(err1, null);
     } else {
-      Noti.create(noti, (err2, result2) => {
-        if (err2) {
-          callback(err2, null);
-        } else {
-          callback(null, result1);
-        }
-      });
+      if (!userInfo.username || !status) {
+        callback(null, result1);
+      } else {
+        Noti.create(noti, (err2, result2) => {
+          if (err2) {
+            callback(err2, null);
+          } else {
+            callback(null, result1);
+          }
+        });
+      }
     }
   });
 };

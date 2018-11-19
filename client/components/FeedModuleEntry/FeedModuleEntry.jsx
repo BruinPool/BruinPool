@@ -67,6 +67,7 @@ class FeedModuleEntry extends Component {
     const { expand, browserWidth, picUrl } = this.state;
     const myRide = entry.passengers.includes(userInfo.username);
     const myDrive = entry.ownerUsername === userInfo.username;
+    const available = entry.seats > entry.passengers.length;
     let expandStyle;
     if (isModal) {
       expandStyle = style.modal;
@@ -157,8 +158,12 @@ class FeedModuleEntry extends Component {
             <button className={style.cancelBtn} type="button" onClick={this.cancelHandle}>
               Cancel
             </button>
-          ) : (
+          ) : available ? (
             <button className={style.joinBtn} type="button" onClick={this.join}>
+              Join
+            </button>
+          ) : (
+            <button className={style.joinBtnDisabled} type="button" disabled>
               Join
             </button>
           )}

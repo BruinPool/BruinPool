@@ -8,8 +8,7 @@ const LoginPage = ({ login }) => {
   return (
     <div className={style.main}>
       <div className={style.imgContainer}>
-        <img alt="mainLogo" src="https://png.pngtree.com/element_origin_min_pic/16/10/02/1557f0b6a826a07.jpg" className={style.coverImg} />
-        Got Ride?
+        <img alt="mainLogo" src="https://s3-us-west-1.amazonaws.com/bruinpoolprofilepics/bucketFolder/Beta+TRANSPARENT.png" className={style.coverImg} />
       </div>
       <div className={style.modulesContainer}>
         <LoginModule login={login} />

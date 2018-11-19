@@ -102,7 +102,7 @@ app.post('/rideList', (req, res) => {
 });
 
 app.put('/rideList', (req, res) => {
-  db.rideUpdate(req.body.entry, req.body.username, req.body.status, (err, data) => {
+  db.rideUpdate(req.body.entry, req.body.userInfo, req.body.status, (err, data) => {
     if (err) {
       res.sendStatus(500);
     } else {

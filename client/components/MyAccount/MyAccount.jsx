@@ -108,20 +108,25 @@ class MyAccount extends Component {
 
   submitFile () {
     const { file } = this.state;
-    const { userInfo, cookieAuth } = this.props;
-    const formData = new FormData();
+    if (file[0].size > 2200000) {
+      alert('File too big!');
+      return;
+    } else {
+      const { userInfo, cookieAuth } = this.props;
+      const formData = new FormData();
 
-    formData.append('file', file[0]);
-    axios.post('/upload-profile-pic', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'userId' : userInfo._id,
-      },
-    }).then(response => {
-      cookieAuth();
-    }).catch(error => {
-      console.error(error);
-    });
+      formData.append('file', file[0]);
+      axios.post('/upload-profile-pic', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'userId' : userInfo._id,
+        },
+      }).then(response => {
+        cookieAuth();
+      }).catch(error => {
+        console.error(error);
+      });
+    }
   }
 
   handleUpload (e) {

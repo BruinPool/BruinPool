@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import style from './FeedModule.css';
 import FeedModuleEntry from '../FeedModuleEntry/FeedModuleEntry';
+import EmptyPage from '../EmptyPage/EmptyPage';
 
 class FeedModule extends Component {
   constructor (props) {
@@ -68,6 +69,7 @@ class FeedModule extends Component {
             </button>
           </div>
         )}
+        {rideFeed.length === 0 && <EmptyPage page="rider" />}
         {rideFeed.map(entry => <FeedModuleEntry key={entry._id} join={join} fetchProfilePic={fetchProfilePic} fetchRideFeed={fetchRideFeed} toggleInfoModal={toggleInfoModal} fetchRideUpcoming={fetchRideUpcoming} driveFetch={driveFetch} driveFetchUpcoming={driveFetchUpcoming} entry={entry} userInfo={userInfo} edit={edit} cancel={cancel} driveCancel={driveCancel} toggleEditModal={toggleEditModal} />)}
         <button className={style.fetchMoreRideFeedBtn} type="button" onClick={this.onClick} >
           Load more

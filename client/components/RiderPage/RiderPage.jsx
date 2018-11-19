@@ -4,9 +4,6 @@ import FilterModule from '../FilterModule/FilterModule';
 import FeedModule from '../FeedModule/FeedModule';
 import UpcomingFeed from '../UpcomingFeed/UpcomingFeed';
 import Header from '../Header/Header';
-import { feed, upcoming } from '../mockData';
-
-const axios = require('axios');
 
 class RiderPage extends Component {
   constructor () {

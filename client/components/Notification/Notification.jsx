@@ -33,7 +33,15 @@ class Notification extends Component {
           {oldNoti.map((item) => {
             return (
               <div className={style.noti}>
-                {item.msg}
+                <div className={style.msg}>
+                  {item.msg}
+                </div>
+                <div className={style.email}>
+                  {item.passengerEmail}
+                </div>
+                <div className={style.phoneNumber}>
+                  {item.passengerPhoneNumber}
+                </div>
               </div>
             );
           })}
