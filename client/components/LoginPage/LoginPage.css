@@ -28,16 +28,12 @@
 @media (min-width: 320px) and (max-width: 480px) {
   
   .imgContainer {
-    position: fixed;
-    left: 0;
-    top: 0;
+    display: none;
   }
 
   .modulesContainer {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
+    position: absolute;
+    height: 100%;
     width: 100%;
     background-color: white;
   }

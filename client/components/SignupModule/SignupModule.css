@@ -97,3 +97,10 @@
   margin: 20px auto auto auto;
   width: 60%;
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .signupDescription {
+    font-size: 39px !important;
+  }
+}

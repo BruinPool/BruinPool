@@ -29,6 +29,7 @@
   color: white;
   cursor: pointer;
   font-size: 30px;
+  text-decoration: unset;
 }
 
 .userBtn {

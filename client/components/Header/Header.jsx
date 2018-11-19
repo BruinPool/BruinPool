@@ -29,9 +29,9 @@ class Header extends Component {
     return (
       <header className={style.header} style={curPage === 'rider' ? ({ backgroundColor: '#8cd2ff' }) : ({ backgroundColor: '#f7b400' })}>
         <div className={style.topDivider} />
-        <div className={style.logo}>
+        <Link to="/rider" className={style.logo}>
           BruinPool
-        </div>
+        </Link>
         <button className={style.notiBtnDesktopBox} style={curPage === 'rider' ? ({ backgroundColor: '#8cd2ff' }) : ({ backgroundColor: '#f7b400' })} type="button" onClick={this.onClick}>
           {isNoti ? (
             <img className={style.notiBtnDesktop} src="https://s3-us-west-1.amazonaws.com/bruinpoolprofilepics/bucketFolder/Bell+Icon+with+Dot.png" />
