@@ -13,9 +13,11 @@ class FilterModule extends Component {
       to: '',
       date: moment(),
       destination: [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
+        { value: 'SF Bay Area', label: 'SF Bay Area' },
+        { value: 'Davis', label: 'Davis' },
+        { value: 'Santa Barbara', label: 'Santa Barbara' },
+        { value: 'Orange County', label: 'Orange County' },
+        { value: 'San Diego', label: 'San Diego' },
       ],
     };
 
