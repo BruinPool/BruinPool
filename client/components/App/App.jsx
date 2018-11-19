@@ -387,6 +387,7 @@ class App extends Component {
         alert('Posted!');
         this.fetchDriveUpcoming();
         this.fetchDriveHistory();
+        this.fetchRideFeed();
       })
       .catch((error) => {
         console.error(error);
@@ -405,6 +406,7 @@ class App extends Component {
         this.cookieAuth(authToken);
         this.fetchDriveHistory();
         this.fetchDriveUpcoming();
+        this.fetchRideFeed();
       })
       .catch((err) => {
         console.error(err);
