@@ -17,6 +17,7 @@ class PostModule extends Component {
       price: '',
       detail: '',
       destination: [
+        { value: 'UCLA', label: 'UCLA' },
         { value: 'SF Bay Area', label: 'SF Bay Area' },
         { value: 'Davis', label: 'Davis' },
         { value: 'Santa Barbara', label: 'Santa Barbara' },
