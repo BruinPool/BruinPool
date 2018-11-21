@@ -91,6 +91,16 @@ class FeedModuleEntry extends Component {
             <div className={style.ownerUsernameExpanded}>
               {entry.ownerUsername}
             </div>
+            {myRide && (
+              <div className={style.driverInfo}>
+                <div className={style.driverEmail}>
+                  {entry.ownerEmail}
+                </div>
+                <div className={style.driverPhoneNumber}>
+                  {entry.ownerPhoneNumber}
+                </div>
+              </div>
+            )}
           </div>
           <div className={style.margin} />
           <div className={style.divider} />

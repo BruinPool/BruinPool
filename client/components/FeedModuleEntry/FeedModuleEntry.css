@@ -18,6 +18,21 @@
   cursor: pointer;
 }
 
+.driverInfo {
+  display: inline-block;
+  font-size: 11px;
+  padding-top: 30px;
+}
+
+.driverEmail {
+  display: inline-block;
+}
+
+.driverPhoneNumber {
+  display: inline-block;
+  margin-left: 5px;
+}
+
 .modal {
   border: none !important;
 }

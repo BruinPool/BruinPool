@@ -8,7 +8,6 @@ require('dotenv').config();
 const S3_BUCKET = process.env.S3_BUCKET;
 const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
 const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
-console.log(S3_BUCKET)
 
 const AWS = require('aws-sdk');
 const fs = require('fs');
@@ -223,6 +222,6 @@ app.get('/*', (req, res) => {
 });
 
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3001, () => {
   console.log('listening!');
 });
